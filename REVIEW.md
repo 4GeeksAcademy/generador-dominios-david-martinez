@@ -10,13 +10,13 @@
 ## ✅ Aspectos Positivos
 
 1. **Lógica combinatoria bien planteada**
-   - En `app.js` (raíz), líneas 8-17, usas loops anidados correctos para combinar los arrays.
+   - En `origin/main`, `app.js` (raíz), usas loops anidados correctos para combinar los arrays.
 
 2. **Uso correcto de template literals**
-   - En `app.js` (raíz), línea 13, construyes el dominio con `` `${p}${a}${n}${ext}` `` de forma limpia.
+   - En `origin/main`, `app.js` (raíz), construyes el dominio con `` `${p}${a}${n}${ext}` `` de forma limpia.
 
 3. **Bonus de extensiones implementado**
-   - En `app.js` (raíz), línea 5, incluyes varias extensiones (`.com`, `.net`, `.us`, `.io`).
+   - En `origin/main`, `app.js` (raíz), incluyes varias extensiones (`.com`, `.net`, `.us`, `.io`).
 
 ---
 
@@ -80,20 +80,21 @@ window.onload = function() {
 
 **Código mejorado:**
 ```javascript
-function displayDomains() {
-  const domains = generateDomains();
-  const domainsHTML = domains.map(domain => `<div class="domain-item">${domain}</div>`).join('');
+function renderDomains(domains) {
+  const domainCount = document.querySelector("#domainCount");
+  const domainList = document.querySelector("#domainList");
 
-  document.body.innerHTML = `
-    <div class="container">
-      <h1>🌐 Domain Name Generator</h1>
-      <p class="count">Generated <strong>${domains.length}</strong> domain names:</p>
-      <div class="domain-list">${domainsHTML}</div>
-    </div>
-  `;
+  if (!domainCount || !domainList) return;
+
+  domainCount.textContent = `${domains.length} domains generated automatically`;
+  domainList.innerHTML = domains
+    .map((domain) => `<li class="domain-card">${domain}</li>`)
+    .join("");
 }
 
-window.addEventListener('load', displayDomains);
+window.addEventListener("load", () => {
+  renderDomains(generateDomains());
+});
 ```
 
 **¿Por qué esta mejora?**
@@ -115,7 +116,10 @@ window.addEventListener('load', displayDomains);
 **Código mejorado:**
 ```html
 <title>Domain Name Generator - 4Geeks</title>
-<div id="app"></div>
+<main class="app-shell">
+  <p id="domainCount" class="count-badge"></p>
+  <ul id="domainList" class="domain-list"></ul>
+</main>
 ```
 
 **Beneficios:**
@@ -137,14 +141,19 @@ body {
 
 **Código mejorado:**
 ```css
-.domain-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
+.count-badge {
+  display: inline-flex;
+  padding: 10px 16px;
 }
 
-.domain-item:hover {
-  transform: translateY(-5px);
+.domain-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.domain-card:hover {
+  transform: translateY(-3px);
 }
 ```
 
@@ -185,34 +194,34 @@ body {
 
 ## 📊 Evaluación Detallada
 
-### Criterios de Evaluación (Total: 37/100)
+### Criterios de Evaluación (Total: 31/100)
 
 | Criterio | Puntos | Obtenido | Comentario |
 |----------|--------|----------|------------|
-| **Funcionalidad Básica** | 30 | 12 | La idea de combinaciones existe, pero no está conectada al flujo activo ni renderizada |
-| **Código Limpio** | 20 | 11 | Código legible en `app.js`, pero disperso y sin cerrar placeholders en `src/app.js` |
-| **Estructura** | 15 | 4 | Falta separación efectiva de generación/render en el archivo que sí se ejecuta |
-| **Buenas Prácticas** | 15 | 6 | Buen uso de `for...of` y template literals, pero faltan `map/join` y modularización en `main` |
+| **Funcionalidad Básica** | 30 | 10 | El build pasa, pero la app activa no genera ni muestra dominios en pantalla |
+| **Código Limpio** | 20 | 10 | La idea en `app.js` es legible, pero hay placeholders, archivo muerto y `let` innecesarios |
+| **Estructura** | 15 | 3 | La lógica quedó fuera del entrypoint real y no hay separación útil en `src/app.js` |
+| **Buenas Prácticas** | 15 | 5 | Hay `for...of` y template literals, pero no se aplican en el flujo que renderiza la app |
 | **HTML/CSS** | 10 | 2 | Se mantiene boilerplate y estilo mínimo |
-| **UX/Animaciones** | 10 | 2 | No hay lista visual de dominios ni feedback de interacción |
-| **TOTAL** | **100** | **37** | **INSUFICIENTE ❌** |
+| **UX/Animaciones** | 10 | 1 | No hay contador, lista visual ni feedback de interacción útil para el ejercicio |
+| **TOTAL** | **100** | **31** | **INSUFICIENTE ❌** |
 
-### Desglose de Puntos Perdidos (-63 puntos)
+### Desglose de Puntos Perdidos (-69 puntos)
 
-1. **-18 puntos** - Lógica principal fuera del entrypoint real del proyecto.
-2. **-12 puntos** - No se muestran dominios en pantalla.
-3. **-11 puntos** - Estructura insuficiente en `src/app.js`.
-4. **-8 puntos** - HTML en modo plantilla sin adaptar.
-5. **-8 puntos** - CSS sin layout de resultados ni responsive real.
-6. **-6 puntos** - UX básica ausente (contador, grid final, feedback).
+1. **-20 puntos** - La app real no genera dominios porque la lógica quedó fuera del entrypoint activo.
+2. **-12 puntos** - No se muestran dominios en pantalla; el ejercicio queda solo en placeholder.
+3. **-12 puntos** - La estructura no separa generación y render en el archivo que ejecuta Vite.
+4. **-8 puntos** - HTML en modo plantilla sin adaptar al objetivo del proyecto.
+5. **-9 puntos** - CSS sin layout de resultados ni responsive visible para el listado.
+6. **-8 puntos** - UX ausente: sin contador, sin lista escaneable y sin feedback visual.
 
 ### Cómo Llegar a 100/100
 
 Aplicando las correcciones de este PR:
-- ✅ **+30 puntos** - Implementar en `src/app.js` la generación + render con `generateDomains()` y `displayDomains()`.
-- ✅ **+15 puntos** - Mejorar estructura y separación de responsabilidades.
-- ✅ **+10 puntos** - Personalizar `index.html` y `style.css` para el objetivo del proyecto.
-- ✅ **+8 puntos** - Añadir UX mínima (contador + grid responsive + hover).
+- ✅ **+30 puntos** - Integrar la generación y el render en `src/app.js`, que es el entrypoint real del proyecto.
+- ✅ **+15 puntos** - Separar la generación de dominios del render y eliminar el archivo JS muerto de la raíz.
+- ✅ **+14 puntos** - Reemplazar el boilerplate por HTML y CSS pensados para el generador.
+- ✅ **+10 puntos** - Añadir contador, grid responsive y hover para mejorar la lectura de resultados.
 
 **= 100/100** 🎉
 
