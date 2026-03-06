@@ -1,5 +1,94 @@
-@import "bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-body{
-    background: white;
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #fff; /* Texto blanco para contrastar */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* Degradado de fondo vibrante y moderno */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%; /* Tamaño grande para la animación */
+  animation: gradientAnimation 15s ease infinite; /* Animación infinita */
+}
+
+/* Definición de la animación del degradado */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+h1 {
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Sombra para que resalte */
+  color: #fff;
+}
+
+#count {
+  color: rgba(255,255,255,0.8); /* Texto secundario en blanco semi-transparente */
+  font-weight: 300;
+}
+
+/* Estilo para el contenedor de la lista, haciéndolo un poco transparente */
+.card {
+  background-color: rgba(255, 255, 255, 0.9); /* Blanco con transparencia */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Sombra más pronunciada */
+  backdrop-filter: blur(5px); /* Efecto de desenfoque detrás de la tarjeta */
+}
+
+.card-header {
+  background-color: rgba(0, 0, 0, 0.05) !important; /* Cabecera sutil */
+  color: #333 !important;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  font-weight: 600;
+  border-radius: 15px 15px 0 0 !important;
+}
+
+/* Layout Grid para los dominios */
+#domain-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  padding: 20px;
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+/* Estilo individual para cada dominio */
+.domain-item {
+  background-color: #fff;
+  color: #333;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  transition: all 0.2s ease;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+/* Efecto hover vibrante al pasar el ratón */
+.domain-item:hover {
+  transform: translateY(-3px) scale(1.02); /* Se eleva y agranda un poco */
+  box-shadow: 0 5px 15px rgba(231, 60, 126, 0.3); /* Sombra de color */
+  background-color: #e73c7e; 
+  color: #fff; /* Texto blanco al hover */
+  border-color: #e73c7e;
+  cursor: pointer;
+}
+
+footer {
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+  font-size: 0.8rem;
 }
